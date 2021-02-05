@@ -93,7 +93,7 @@ Module.register("mmm-lunar_calendar", {
 		
 		var lunarDate = [0, 0, 0, 0];
 		if (calendarType == 1) {
-			lunarDate = this.convertSolar2Lunar(moment().date(), month, year, 7);	
+			lunarDate = this.convertSolar2Lunar(moment().date(), month + 1, year, 7);	
 		}
 
 		// We only fill in the THEAD section if the .showHeader config is set to true
@@ -136,7 +136,7 @@ Module.register("mmm-lunar_calendar", {
 			footerTD.innerHTML = "Calendar currently in DEBUG mode!<br />Please see console log.";
 		} else {
 			if (calendarType == 1) {
-				jd = this.jdFromDate(moment().date(), month, year);
+				jd = this.jdFromDate(moment().date(), month + 1, year);
 				var dateCan = this.calculateDateCan(jd);
 				var dateChi = this.calculateDateChi(jd);
 				var monthCan = this.calculateMonthCan(lunarDate[1], lunarDate[2]);
@@ -204,7 +204,7 @@ Module.register("mmm-lunar_calendar", {
 						innerSpan.className = "daily";
 					}
 					if (calendarType == 1) {
-						lunarDate = this.convertSolar2Lunar(day, month, year, 7);
+						lunarDate = this.convertSolar2Lunar(day, month + 1, year, 7);
 						if (lunarDate[0] == 1) {
 							innerSpan.innerHTML = lunarDate[0] + "/" + lunarDate[1];
 						} else {
