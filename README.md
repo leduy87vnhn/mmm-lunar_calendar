@@ -12,7 +12,7 @@ http://www.informatik.uni-leipzig.de/~duc/amlich/calrules.html
 ## Installing the module
 Clone this repository in your `~/MagicMirror/modules/` folder `( $ cd ~MagicMirror/modules/ )`:
 ````javascript
-git clone https://github.com/KirAsh4/calendar_monthly
+git clone https://github.com/leduy87vnhn/mmm-lunar_calendar
 ````
 
 ## Using the module
