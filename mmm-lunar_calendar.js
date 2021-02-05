@@ -1,4 +1,4 @@
-/* Magic Mirror Module: lunar_calendar
+/* Magic Mirror Module: mmm-lunar_calendar
  * v1.0 - January 2021
  *
  * By Le Duy <leduy87vnhn@gmail.com>
@@ -21,7 +21,7 @@ Module.register("mmm-lunar_calendar", {
 							// This is to prevent collision with other modules refreshing
 							// at the same time.
 		displayLunar:		"1",
-		displaySun:			"1",
+		displaySun:		"1",
 		displayLang:		"vn",
 	},
 
@@ -76,12 +76,10 @@ Module.register("mmm-lunar_calendar", {
 				this.loaded = true;
 			}
 			
-//			if (this.config.displayLunar == 1) {
-//				var wrapper = document.createElement("table");
-//				wrapper.className = 'xsmall';
-//				wrapper.id = 'calendar-table';
-//				this.displayCalendar(wrapper, 1, month, year, monthName, monthLength, startingDay);
-//			}
+			if (this.config.displayLunar == 1) {
+				this.displayCalendar(wrapper, 1, month, year, monthName, monthLength, startingDay);
+				this.loaded = true;
+			}
 			return wrapper;
 		}
 
