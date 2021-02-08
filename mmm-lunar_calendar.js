@@ -16,13 +16,11 @@ Module.register("mmm-lunar_calendar", {
 							// when the mirror first starts up.
 		fadeSpeed:		2,		// How fast (in seconds) to fade out and in during a midnight refresh
 		showHeader:		true,		// Show the month and year at the top of the calendar
-		cssStyle:		"block",	// which CSS style to use, 'block', 'slate', or 'custom'
+		cssStyle:		"standard",	// 'block', 'standard', 'slate', or 'custom'
 		updateDelay:		5,		// How many seconds after midnight before a refresh
 							// This is to prevent collision with other modules refreshing
 							// at the same time.
-		displayLunar:		"1",
-		displaySun:		"1",
-		displayLang:		"vn",
+		displayMode:		"1",		// 0: only sun calendar, 1: sun and lunar calendar, 2: sun and lunar calendar in block style. Option 2 only support 'block' cssStyle
 	},
 
 	// Required styles
@@ -31,7 +29,11 @@ Module.register("mmm-lunar_calendar", {
 	},
 
 	getThemeCss: function() {
-		return this.data.path + "/css/themes/" + this.config.cssStyle + ".css";
+		if (this.config.displayMode == 2) {
+			return this.data.path + "/css/themes/" + "block.css";
+		} else {
+			return this.data.path + "/css/themes/" + this.config.cssStyle + ".css";
+		}
 	},
 
 	// Required scripts
@@ -67,19 +69,23 @@ Module.register("mmm-lunar_calendar", {
 			// Find first day of the month, LOCALE aware
 			var startingDay = moment().date(1).weekday();
 
-			if (this.config.displaySun == 1) {
-				
+			if (this.config.displayMode == 2) {
+				var wrapper = document.createElement("div");
+				//this.displayCalendar(wrapper, 0, month, year, monthName, monthLength, startingDay);
+			} else {
+			
 				var wrapper = document.createElement("table");
 				wrapper.className = 'xsmall';
 				wrapper.id = 'calendar-table';
-				this.displayCalendar(wrapper, 0, month, year, monthName, monthLength, startingDay);
-				this.loaded = true;
+				
+				if (this.config.displayMode == 0) { // Only sun calendar
+					this.displayCalendar(wrapper, 0, month, year, monthName, monthLength, startingDay);
+				} else {					// Include block calendar
+					this.displayCalendar(wrapper, 1, month, year, monthName, monthLength, startingDay);
+				}
 			}
 			
-			if (this.config.displayLunar == 1) {
-				this.displayCalendar(wrapper, 1, month, year, monthName, monthLength, startingDay);
-				this.loaded = true;
-			}
+			this.loaded = true;
 			return wrapper;
 		}
 
@@ -132,8 +138,9 @@ Module.register("mmm-lunar_calendar", {
 		var footerTD = document.createElement("td");
 		footerTD.colSpan ="7";
 		footerTD.className = "footer";
+		var displayMonth = "";
 		if (this.config.debugging) {
-			footerTD.innerHTML = "Calendar currently in DEBUG mode!<br />Please see console log.";
+			displayMonth = "Calendar currently in DEBUG mode!<br />Please see console log.";
 		} else {
 			if (calendarType == 1) {
 				jd = this.jdFromDate(moment().date(), month + 1, year);
@@ -145,11 +152,12 @@ Module.register("mmm-lunar_calendar", {
 				if (lunarDate[3] == 1) {
 					monthChi = monthChi + " (Nhuận)";
 				}
-				footerTD.innerHTML = "Ngày " + dateCan + " " + dateChi + " - Tháng " + monthCan + " " + monthChi;
+				displayMonth = "Ngày " + dateCan + " " + dateChi + " - Tháng " + monthCan + " " + monthChi;
 			} else {
-				footerTD.innerHTML = "&nbsp;";
+				displayMonth = "&nbsp;";
 			}
 		}
+		footerTD.innerHTML = displayMonth;
 
 		footerTR.appendChild(footerTD);
 		footer.appendChild(footerTR);
@@ -189,11 +197,22 @@ Module.register("mmm-lunar_calendar", {
 				squareContent.className = "square-content";
 				var squareContentInner = document.createElement("div");
 				var innerSpan = document.createElement("span");
-			
+				var displayDate = "";
+				
 				if (j < startingDay && i == 0) {
 					// First row, fill in empty slots
 					innerSpan.className = "monthPrev";
-					innerSpan.innerHTML = moment().subtract(1, 'months').endOf('month').subtract((startingDay - 1) - j, 'days').date();
+					displayDate = moment().subtract(1, 'months').endOf('month').subtract((startingDay - 1) - j, 'days').date();
+					if (calendarType == 1)
+					{
+						lunarDate = this.convertSolar2Lunar(j, month + 1, year, 7);
+						if (lunarDate[0] == 1) {
+							displayDate = displayDate + " (" + lunarDate[0] + "/" + lunarDate[1] + " )";
+						} else {
+							displayDate = displayDate + " (" + lunarDate[0] + ")";
+						}
+					}
+					innerSpan.innerHTML = displayDate;
 
 				} else if (day <= monthLength && (i > 0 || j >= startingDay)) {
 					if (day == moment().date()) {
@@ -203,21 +222,32 @@ Module.register("mmm-lunar_calendar", {
 						innerSpan.id = "day" + day;
 						innerSpan.className = "daily";
 					}
+					displayDate = day;
 					if (calendarType == 1) {
 						lunarDate = this.convertSolar2Lunar(day, month + 1, year, 7);
 						if (lunarDate[0] == 1) {
-							innerSpan.innerHTML = lunarDate[0] + "/" + lunarDate[1];
+							displayDate = displayDate + " (" + lunarDate[0] + "/" + lunarDate[1] + " )";
 						} else {
-							innerSpan.innerHTML = lunarDate[0];
+							displayDate = displayDate + " (" + lunarDate[0] + ")";
 						}
-					} else {
-						innerSpan.innerHTML = day;
 					}
+					
+					innerSpan.innerHTML = displayDate;
 					day++;
 				} else if (day > monthLength && i > 0) {
 					// Last row, fill in empty space
 					innerSpan.className = "monthNext";
-					innerSpan.innerHTML = moment([year, month, monthLength]).add(nextMonth, 'days').date();
+					displayDate = moment([year, month, monthLength]).add(nextMonth, 'days').date();
+					if (calendarType == 1) {
+						lunarDate = this.convertSolar2Lunar(day, month + 1, year, 7);
+						if (lunarDate[0] == 1) {
+							displayDate = displayDate + " (" + lunarDate[0] + "/" + lunarDate[1] + " )";
+						} else {
+							displayDate = displayDate + " (" + lunarDate[0] + ")";
+						}
+					}
+					
+					innerSpan.innerHTML = displayDate;
 					nextMonth++;
 				}
 				squareContentInner.appendChild(innerSpan);
