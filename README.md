@@ -1,4 +1,4 @@
-# Module: Calendar [Monthly]
+# Module: Calendar [Sun & Lunar]
 
 The `lunar_calendar` module is a simple month-view calendar created for the MagicMirror project
 by Michael Teeuw (https://github.com/MichMich/MagicMirror). The modules refreshes its timer every
