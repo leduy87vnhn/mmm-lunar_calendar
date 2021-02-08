@@ -31,11 +31,9 @@ modules: [
 						// initialLoadDelay:	0,
 						// fadeSpeed:		2,
 						// showHeader:		true,
-						// cssStyle:		"block",
+						// cssStyle:		"standard",
 						// updateDelay:		5,
-						// displayLunar:		"1",
-						// displaySun:			"1",
-						// displayLang:		"vn",
+						// displayMode:		"1",
 				}
 			}
 ]
