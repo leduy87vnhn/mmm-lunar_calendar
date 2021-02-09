@@ -184,7 +184,7 @@ Module.register("mmm-lunar_calendar", {
 					displayMonth = displayMonth + " - Táo Quân về trời";
 				}
 			} else {
-				displayMonth == "";
+				displayMonth = "";
 				if ((day == 1) && (month == 0)) {
 					displayMonth = displayMonth + " - Tết Dương Lịch";
 				} else if ((day == 3) && (month == 1)) {
@@ -322,6 +322,7 @@ Module.register("mmm-lunar_calendar", {
 					if (day == moment().date()) {
 						innerSpan.className = "today";
 					} else {
+						/*
 						if ((calendarType == 1) && (lunarDate[0] <= 5 ) && (lunarDate[1] == 1)) {
 							innerSpan.className = "newyeardate";
 						} else if ((day == 1) && (month == 0)) {
@@ -331,8 +332,9 @@ Module.register("mmm-lunar_calendar", {
 						} else if ((day == 31) && (month == 12)) {
 							innerSpan.className = "endyeardate";	
 						} else
+						*/
 							innerSpan.className = "daily";
-						}
+						//}
 					}
 					innerSpan.innerHTML = displayDate;
 					day++;
