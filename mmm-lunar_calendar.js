@@ -246,7 +246,7 @@ Module.register("mmm-lunar_calendar", {
 							displayDate = displayDate + " (" + lunarDate[0] + ")";
 						}
 					}
-					
+					day++;
 					innerSpan.innerHTML = displayDate;
 					nextMonth++;
 				}
