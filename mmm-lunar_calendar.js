@@ -251,10 +251,19 @@ Module.register("mmm-lunar_calendar", {
 
 		}
 		footerTD.innerHTML = displayMonth;
-
-		footerTR.appendChild(footerTD);
+		footerTR.appendChild(footerTD);		
+		
+		var footerTD2 = document.createElement("td");
+		footerTD2.colSpan ="7";
+		footerTD2.className = "footer";
+		
+		footerTD2.innerHTML = "Giờ Hoàng Đạo: ";
+		
+		footerTR.appendChild(footerTD2);
 		footer.appendChild(footerTR);
 		wrapper.appendChild(footer);
+		
+		
 
 		// Create TBODY section with day names
 		var bodyContent = document.createElement("tBody");
