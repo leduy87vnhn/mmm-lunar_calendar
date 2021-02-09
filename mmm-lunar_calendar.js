@@ -153,8 +153,101 @@ Module.register("mmm-lunar_calendar", {
 					monthChi = monthChi + " (Nhuận)";
 				}
 				displayMonth = "Ngày " + dateCan + " " + dateChi + " - Tháng " + monthCan + " " + monthChi;
+				if ((lunarDate[0] == 15) && (lunarDate[1] == 8)) {
+					displayMonth = displayMonth + " - Rằm Trung Thu";
+				}
+				if ((lunarDate[0] == 10) && (lunarDate[1] == 3)) {
+					displayMonth = displayMonth + " - Giỗ tổ Hùng Vương";
+				}
+				if ((lunarDate[0] == 5) && (lunarDate[1] == 5)) {
+					displayMonth = displayMonth + " - Tết Đoan Ngọ";
+				}
+				if ((lunarDate[0] == 3) && (lunarDate[1] == 3)) {
+					displayMonth = displayMonth + " - Tết Hàn Thực";
+				}
+				if ((lunarDate[0] == 1) && (lunarDate[1] == 1)) {
+					displayMonth = displayMonth + " - Tết Nguyên Đán";
+				}
+				if ((lunarDate[0] == 15) && (lunarDate[1] == 1)) {
+					displayMonth = displayMonth + " - Tết Nguyên Tiêu";
+				}
+				if ((lunarDate[0] == 15) && (lunarDate[1] == 4)) {
+					displayMonth = displayMonth + " - Lễ Phật Đản";
+				}
+				if ((lunarDate[0] == 15) && (lunarDate[1] == 7)) {
+					displayMonth = displayMonth + " - Lễ Vu Lan";
+				}
+				if ((lunarDate[0] == 9) && (lunarDate[1] == 9)) {
+					displayMonth = displayMonth + " - Tết Trùng Cửu";
+				}
+				if ((lunarDate[0] == 23) && (lunarDate[1] == 12)) {
+					displayMonth = displayMonth + " - Táo Quân về trời";
+				}
 			} else {
-				displayMonth = "&nbsp;";
+				displayMonth == "";
+				if ((day == 1) && (month == 0)) {
+					displayMonth = displayMonth + " - Tết Dương Lịch";
+				} else if ((day == 3) && (month == 1)) {
+					displayMonth = displayMonth + " - Thành Lập Đảng";
+				} else if ((day == 14) && (month == 1)) {
+					displayMonth = displayMonth + " - Valentine";
+				} else if ((day == 27) && (month == 1)) {
+					displayMonth = displayMonth + " - Ngày Thầy Thuốc";
+				} else if ((day == 8) && (month == 2)) {
+					displayMonth = displayMonth + " - Quốc Tế Phụ Nữ";
+				} else if ((day == 22) && (month == 2)) {
+					displayMonth = displayMonth + " - Ngày Nước Sạch Thế Giới";
+				} else if ((day == 26) && (month == 2)) {
+					displayMonth = displayMonth + " - Thành Lập Đoàn TNCS HCM";
+				} else if ((day == 27) && (month == 2)) {
+					displayMonth = displayMonth + " - Ngày Thể Thao Việt Nam";
+				} else if ((day == 22) && (month == 3)) {
+					displayMonth = displayMonth + " - Ngày Trái Đất";
+				} else if ((day == 30) && (month == 3)) {
+					displayMonth = displayMonth + " - Giải Phóng Miền Nam";
+				} else if ((day == 1) && (month == 4)) {
+					displayMonth = displayMonth + " - Quốc Tế Lao Động";
+				} else if ((day == 7) && (month == 4)) {
+					displayMonth = displayMonth + " - Chiến Thắng Điện Biên Phủ";
+				} else if ((day == 13) && (month == 4)) {
+					displayMonth = displayMonth + " - Ngày của Mẹ";
+				} else if ((day == 13) && (month == 4)) {
+					displayMonth = displayMonth + " - Ngày sinh Chủ tịch Hồ Chí Minh";
+				} else if ((day == 1) && (month == 5)) {
+					displayMonth = displayMonth + " - Quốc Tế Thiếu Nhi";
+				} else if ((day == 17) && (month == 5)) {
+					displayMonth = displayMonth + " - Ngày của Cha";
+				} else if ((day == 21) && (month == 5)) {
+					displayMonth = displayMonth + " - Ngày Báo Chí Việt Nam";
+				} else if ((day == 28) && (month == 5)) {
+					displayMonth = displayMonth + " - Ngày Gia Đình Việt Nam";
+				} else if ((day == 11) && (month == 6)) {
+					displayMonth = displayMonth + " - Ngày Dân Số Thế Giới";
+				} else if ((day == 27) && (month == 6)) {
+					displayMonth = displayMonth + " - Ngày Thương Binh Liệt Sĩ";
+				} else if ((day == 19) && (month == 7)) {
+					displayMonth = displayMonth + " - Cách Mạng Tháng Tám";
+				} else if ((day == 2) && (month == 8)) {
+					displayMonth = displayMonth + " - Quốc Khánh Việt Nam";
+				} else if ((day == 7) && (month == 8)) {
+					displayMonth = displayMonth + " - Thành Lập Đài Truyền Hình VN";
+				} else if ((day == 1) && (month == 9)) {
+					displayMonth = displayMonth + " - Quốc Tế Người Cao Tuổi";
+				} else if ((day == 10) && (month == 9)) {
+					displayMonth = displayMonth + " - Giải Phóng Thủ Đô";
+				} else if ((day == 20) && (month == 9)) {
+					displayMonth = displayMonth + " - Ngày Phụ Nữ Việt Nam";
+				} else if ((day == 31) && (month == 9)) {
+					displayMonth = displayMonth + " - Holloween";
+				} else if ((day == 20) && (month == 10)) {
+					displayMonth = displayMonth + " - Ngày Nhà Giáo Việt Nam";
+				} else if ((day == 22) && (month == 11)) {
+					displayMonth = displayMonth + " - Ngày Quân Đội Việt Nam";
+				} else if ((day == 24) && (month == 11)) {
+					displayMonth = displayMonth + " - Giáng Sinh";
+				} else {
+					displayMonth = displayMonth + "&nbsp;";
+				}
 			}
 		}
 		footerTD.innerHTML = displayMonth;
@@ -215,13 +308,6 @@ Module.register("mmm-lunar_calendar", {
 					innerSpan.innerHTML = displayDate;
 
 				} else if (day <= monthLength && (i > 0 || j >= startingDay)) {
-					if (day == moment().date()) {
-						innerSpan.id = "day" + day;
-						innerSpan.className = "today";
-					} else {
-						innerSpan.id = "day" + day;
-						innerSpan.className = "daily";
-					}
 					displayDate = day;
 					if (calendarType == 1) {
 						lunarDate = this.convertSolar2Lunar(day, month + 1, year, 7);
@@ -232,6 +318,22 @@ Module.register("mmm-lunar_calendar", {
 						}
 					}
 					
+					innerSpan.id = "day" + day;
+					if (day == moment().date()) {
+						innerSpan.className = "today";
+					} else {
+						if ((calendarType == 1) && (lunarDate[0] <= 5 ) && (lunarDate[1] == 1)) {
+							innerSpan.className = "newyeardate";
+						} else if ((day == 1) && (month == 0)) {
+							innerSpan.className = "newyeardate";
+						} else if ((calendarType == 1) && (lunarDate[0] >= 28 ) && (lunarDate[1] == 12)) {
+							innerSpan.className = "endyeardate";
+						} else if ((day == 31) && (month == 12)) {
+							innerSpan.className = "endyeardate";	
+						} else
+							innerSpan.className = "daily";
+						}
+					}
 					innerSpan.innerHTML = displayDate;
 					day++;
 				} else if (day > monthLength && i > 0) {

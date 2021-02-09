@@ -51,6 +51,22 @@
 	color: #80ff00;
 }
 
+.square-content .newyeardate {
+	border: 1px solid #ffb6c1;
+	border-radius: 2px;
+	background-color: #ffb6c1;
+	font-weight: bold;
+	color: #000000;
+}
+
+.square-content .endyeardate {
+	border: 1px solid #00ffff;
+	border-radius: 2px;
+	background-color: #00ffff;
+	font-weight: bold;
+	color: #000000;
+}
+
 .square-content div {
 	display: table;
 	width: 100%;
