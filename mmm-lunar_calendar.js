@@ -138,119 +138,17 @@ Module.register("mmm-lunar_calendar", {
 		var footerTD = document.createElement("td");
 		footerTD.colSpan ="7";
 		footerTD.className = "footer";
-		var displayMonth = "";
+		var displayGoodTime = "";
 		if (this.config.debugging) {
-			displayMonth = "Calendar currently in DEBUG mode!<br />Please see console log.";
+			displayGoodTime = "Calendar currently in DEBUG mode!<br />Please see console log.";
 		} else {
 			if (calendarType == 1) {
-				jd = this.jdFromDate(moment().date(), month + 1, year);
-				var dateCan = this.calculateDateCan(jd);
-				var dateChi = this.calculateDateChi(jd);
-				var monthCan = this.calculateMonthCan(lunarDate[1], lunarDate[2]);
-				var monthChi = this.calculateMonthChi(lunarDate[1]);
-				
-				if (lunarDate[3] == 1) {
-					monthChi = monthChi + " (Nhuận)";
-				}
-				displayMonth = "Ngày " + dateCan + " " + dateChi + " - Tháng " + monthCan + " " + monthChi;
-				if ((lunarDate[0] == 15) && (lunarDate[1] == 8)) {
-					displayMonth = displayMonth + " - Rằm Trung Thu";
-				}
-				if ((lunarDate[0] == 10) && (lunarDate[1] == 3)) {
-					displayMonth = displayMonth + " - Giỗ tổ Hùng Vương";
-				}
-				if ((lunarDate[0] == 5) && (lunarDate[1] == 5)) {
-					displayMonth = displayMonth + " - Tết Đoan Ngọ";
-				}
-				if ((lunarDate[0] == 3) && (lunarDate[1] == 3)) {
-					displayMonth = displayMonth + " - Tết Hàn Thực";
-				}
-				if ((lunarDate[0] == 1) && (lunarDate[1] == 1)) {
-					displayMonth = displayMonth + " - Tết Nguyên Đán";
-				}
-				if ((lunarDate[0] == 15) && (lunarDate[1] == 1)) {
-					displayMonth = displayMonth + " - Tết Nguyên Tiêu";
-				}
-				if ((lunarDate[0] == 15) && (lunarDate[1] == 4)) {
-					displayMonth = displayMonth + " - Lễ Phật Đản";
-				}
-				if ((lunarDate[0] == 15) && (lunarDate[1] == 7)) {
-					displayMonth = displayMonth + " - Lễ Vu Lan";
-				}
-				if ((lunarDate[0] == 9) && (lunarDate[1] == 9)) {
-					displayMonth = displayMonth + " - Tết Trùng Cửu";
-				}
-				if ((lunarDate[0] == 23) && (lunarDate[1] == 12)) {
-					displayMonth = displayMonth + " - Táo Quân về trời";
-				}
-			}
-
-			if ((day == 1) && (month == 0)) {
-				displayMonth = displayMonth + " - Tết Dương Lịch";
-			} else if ((day == 3) && (month == 1)) {
-				displayMonth = displayMonth + " - Thành Lập Đảng";
-			} else if ((day == 14) && (month == 1)) {
-				displayMonth = displayMonth + " - Valentine";
-			} else if ((day == 27) && (month == 1)) {
-				displayMonth = displayMonth + " - Ngày Thầy Thuốc";
-			} else if ((day == 8) && (month == 2)) {
-				displayMonth = displayMonth + " - Quốc Tế Phụ Nữ";
-			} else if ((day == 22) && (month == 2)) {
-				displayMonth = displayMonth + " - Ngày Nước Sạch Thế Giới";
-			} else if ((day == 26) && (month == 2)) {
-				displayMonth = displayMonth + " - Thành Lập Đoàn TNCS HCM";
-			} else if ((day == 27) && (month == 2)) {
-				displayMonth = displayMonth + " - Ngày Thể Thao Việt Nam";
-			} else if ((day == 22) && (month == 3)) {
-				displayMonth = displayMonth + " - Ngày Trái Đất";
-			} else if ((day == 30) && (month == 3)) {
-				displayMonth = displayMonth + " - Giải Phóng Miền Nam";
-			} else if ((day == 1) && (month == 4)) {
-				displayMonth = displayMonth + " - Quốc Tế Lao Động";
-			} else if ((day == 7) && (month == 4)) {
-				displayMonth = displayMonth + " - Chiến Thắng Điện Biên Phủ";
-			} else if ((day == 13) && (month == 4)) {
-				displayMonth = displayMonth + " - Ngày của Mẹ";
-			} else if ((day == 13) && (month == 4)) {
-				displayMonth = displayMonth + " - Ngày sinh Chủ tịch Hồ Chí Minh";
-			} else if ((day == 1) && (month == 5)) {
-				displayMonth = displayMonth + " - Quốc Tế Thiếu Nhi";
-			} else if ((day == 17) && (month == 5)) {
-				displayMonth = displayMonth + " - Ngày của Cha";
-			} else if ((day == 21) && (month == 5)) {
-				displayMonth = displayMonth + " - Ngày Báo Chí Việt Nam";
-			} else if ((day == 28) && (month == 5)) {
-				displayMonth = displayMonth + " - Ngày Gia Đình Việt Nam";
-			} else if ((day == 11) && (month == 6)) {
-				displayMonth = displayMonth + " - Ngày Dân Số Thế Giới";
-			} else if ((day == 27) && (month == 6)) {
-				displayMonth = displayMonth + " - Ngày Thương Binh Liệt Sĩ";
-			} else if ((day == 19) && (month == 7)) {
-				displayMonth = displayMonth + " - Cách Mạng Tháng Tám";
-			} else if ((day == 2) && (month == 8)) {
-				displayMonth = displayMonth + " - Quốc Khánh Việt Nam";
-			} else if ((day == 7) && (month == 8)) {
-				displayMonth = displayMonth + " - Thành Lập Đài Truyền Hình VN";
-			} else if ((day == 1) && (month == 9)) {
-				displayMonth = displayMonth + " - Quốc Tế Người Cao Tuổi";
-			} else if ((day == 10) && (month == 9)) {
-				displayMonth = displayMonth + " - Giải Phóng Thủ Đô";
-			} else if ((day == 20) && (month == 9)) {
-				displayMonth = displayMonth + " - Ngày Phụ Nữ Việt Nam";
-			} else if ((day == 31) && (month == 9)) {
-				displayMonth = displayMonth + " - Holloween";
-			} else if ((day == 20) && (month == 10)) {
-				displayMonth = displayMonth + " - Ngày Nhà Giáo Việt Nam";
-			} else if ((day == 22) && (month == 11)) {
-				displayMonth = displayMonth + " - Ngày Quân Đội Việt Nam";
-			} else if ((day == 24) && (month == 11)) {
-				displayMonth = displayMonth + " - Giáng Sinh";
+				displayGoodTime = "Giờ hoàng đạo: "
 			} else {
-				displayMonth = displayMonth + "&nbsp;";
+				displayGoodTime = "&nbsp;";
 			}
-
 		}
-		footerTD.innerHTML = displayMonth;
+		footerTD.innerHTML = displayGoodTime;
 		footerTR.appendChild(footerTD);		
 		footer.appendChild(footerTR);
 		wrapper.appendChild(footer);		
@@ -380,14 +278,124 @@ Module.register("mmm-lunar_calendar", {
 		bodyTR.id = "calendar-header";
 
 		var bodyTD = document.createElement("td");
-		bodyTD.className = "calendar-header-day";
-		bodyTD.innerHTML = "Giờ Hoàng Đạo: ";
+		bodyTD.className = "calendar-day";
+		bodyTD.innerHTML = this.calLunarDateInfo(calendarType, month, year);
 		bodyTR.appendChild(bodyTD);
 
 		bodyContent.appendChild(bodyTR);
 		wrapper.appendChild(bodyContent);
 
 	},
+	
+	calLunarDateInfo: function(calendarType, month, year) {
+		if (calendarType == 1) {
+			jd = this.jdFromDate(moment().date(), month + 1, year);
+			var dateCan = this.calculateDateCan(jd);
+			var dateChi = this.calculateDateChi(jd);
+			var monthCan = this.calculateMonthCan(lunarDate[1], lunarDate[2]);
+			var monthChi = this.calculateMonthChi(lunarDate[1]);
+			
+			if (lunarDate[3] == 1) {
+				monthChi = monthChi + " (Nhuận)";
+			}
+			LunarDateInfo = "Ngày " + dateCan + " " + dateChi + " - Tháng " + monthCan + " " + monthChi;
+			if ((lunarDate[0] == 15) && (lunarDate[1] == 8)) {
+				LunarDateInfo = LunarDateInfo + " - Rằm Trung Thu";
+			}
+			if ((lunarDate[0] == 10) && (lunarDate[1] == 3)) {
+				LunarDateInfo = LunarDateInfo + " - Giỗ tổ Hùng Vương";
+			}
+			if ((lunarDate[0] == 5) && (lunarDate[1] == 5)) {
+				LunarDateInfo = LunarDateInfo + " - Tết Đoan Ngọ";
+			}
+			if ((lunarDate[0] == 3) && (lunarDate[1] == 3)) {
+				LunarDateInfo = LunarDateInfo + " - Tết Hàn Thực";
+			}
+			if ((lunarDate[0] == 1) && (lunarDate[1] == 1)) {
+				LunarDateInfo = LunarDateInfo + " - Tết Nguyên Đán";
+			}
+			if ((lunarDate[0] == 15) && (lunarDate[1] == 1)) {
+				LunarDateInfo = LunarDateInfo + " - Tết Nguyên Tiêu";
+			}
+			if ((lunarDate[0] == 15) && (lunarDate[1] == 4)) {
+				LunarDateInfo = LunarDateInfo + " - Lễ Phật Đản";
+			}
+			if ((lunarDate[0] == 15) && (lunarDate[1] == 7)) {
+				LunarDateInfo = LunarDateInfo + " - Lễ Vu Lan";
+			}
+			if ((lunarDate[0] == 9) && (lunarDate[1] == 9)) {
+				LunarDateInfo = LunarDateInfo + " - Tết Trùng Cửu";
+			}
+			if ((lunarDate[0] == 23) && (lunarDate[1] == 12)) {
+				LunarDateInfo = LunarDateInfo + " - Táo Quân về trời";
+			}
+		}
+
+		if ((day == 1) && (month == 0)) {
+			LunarDateInfo = LunarDateInfo + " - Tết Dương Lịch";
+		} else if ((day == 3) && (month == 1)) {
+			LunarDateInfo = LunarDateInfo + " - Thành Lập Đảng";
+		} else if ((day == 14) && (month == 1)) {
+			LunarDateInfo = LunarDateInfo + " - Valentine";
+		} else if ((day == 27) && (month == 1)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Thầy Thuốc";
+		} else if ((day == 8) && (month == 2)) {
+			LunarDateInfo = LunarDateInfo + " - Quốc Tế Phụ Nữ";
+		} else if ((day == 22) && (month == 2)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Nước Sạch Thế Giới";
+		} else if ((day == 26) && (month == 2)) {
+			LunarDateInfo = LunarDateInfo + " - Thành Lập Đoàn TNCS HCM";
+		} else if ((day == 27) && (month == 2)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Thể Thao Việt Nam";
+		} else if ((day == 22) && (month == 3)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Trái Đất";
+		} else if ((day == 30) && (month == 3)) {
+			LunarDateInfo = LunarDateInfo + " - Giải Phóng Miền Nam";
+		} else if ((day == 1) && (month == 4)) {
+			LunarDateInfo = LunarDateInfo + " - Quốc Tế Lao Động";
+		} else if ((day == 7) && (month == 4)) {
+			LunarDateInfo = LunarDateInfo + " - Chiến Thắng Điện Biên Phủ";
+		} else if ((day == 13) && (month == 4)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày của Mẹ";
+		} else if ((day == 13) && (month == 4)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày sinh Chủ tịch Hồ Chí Minh";
+		} else if ((day == 1) && (month == 5)) {
+			LunarDateInfo = LunarDateInfo + " - Quốc Tế Thiếu Nhi";
+		} else if ((day == 17) && (month == 5)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày của Cha";
+		} else if ((day == 21) && (month == 5)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Báo Chí Việt Nam";
+		} else if ((day == 28) && (month == 5)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Gia Đình Việt Nam";
+		} else if ((day == 11) && (month == 6)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Dân Số Thế Giới";
+		} else if ((day == 27) && (month == 6)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Thương Binh Liệt Sĩ";
+		} else if ((day == 19) && (month == 7)) {
+			LunarDateInfo = LunarDateInfo + " - Cách Mạng Tháng Tám";
+		} else if ((day == 2) && (month == 8)) {
+			LunarDateInfo = LunarDateInfo + " - Quốc Khánh Việt Nam";
+		} else if ((day == 7) && (month == 8)) {
+			LunarDateInfo = LunarDateInfo + " - Thành Lập Đài Truyền Hình VN";
+		} else if ((day == 1) && (month == 9)) {
+			LunarDateInfo = LunarDateInfo + " - Quốc Tế Người Cao Tuổi";
+		} else if ((day == 10) && (month == 9)) {
+			LunarDateInfo = LunarDateInfo + " - Giải Phóng Thủ Đô";
+		} else if ((day == 20) && (month == 9)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Phụ Nữ Việt Nam";
+		} else if ((day == 31) && (month == 9)) {
+			LunarDateInfo = LunarDateInfo + " - Holloween";
+		} else if ((day == 20) && (month == 10)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Nhà Giáo Việt Nam";
+		} else if ((day == 22) && (month == 11)) {
+			LunarDateInfo = LunarDateInfo + " - Ngày Quân Đội Việt Nam";
+		} else if ((day == 24) && (month == 11)) {
+			LunarDateInfo = LunarDateInfo + " - Giáng Sinh";
+		} else {
+			LunarDateInfo = LunarDateInfo + "&nbsp;";
+		}
+		return LunarDateInfo;
+	}
 	
 	jdFromDate: function(dd, mm, yy) {
 		var a, y, m, jd;
