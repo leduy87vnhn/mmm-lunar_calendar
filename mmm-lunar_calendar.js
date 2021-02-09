@@ -301,11 +301,13 @@ Module.register("mmm-lunar_calendar", {
 		var selectedTime = goodTimeList[dateIndex];
 		var goodTime = "";
 		
-		goodTimeList.forEach(mergeGoodTime);
+		selectedTime.forEach(mergeGoodTime);
 		
 		function mergeGoodTime(value, index, array) {
 			goodTime = goodTime + dayTimeList[value] + ", ";
 		}
+		
+		goodTime = goodTime.substr(0, goodTime.length - 2);
 		
 		return goodTime;
 	},
