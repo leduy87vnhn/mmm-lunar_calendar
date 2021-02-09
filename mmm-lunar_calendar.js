@@ -143,7 +143,7 @@ Module.register("mmm-lunar_calendar", {
 			displayGoodTime = "Calendar currently in DEBUG mode!<br />Please see console log.";
 		} else {
 			if (calendarType == 1) {
-				displayGoodTime = "Giờ hoàng đạo: "
+				displayGoodTime = "Giờ hoàng đạo: " + this.calGoodTime(month, year);
 			} else {
 				displayGoodTime = "&nbsp;";
 			}
@@ -226,7 +226,7 @@ Module.register("mmm-lunar_calendar", {
 							innerSpan.className = "newyeardate";
 						} else if ((calendarType == 1) && (lunarDate[0] >= 28 ) && (lunarDate[1] == 12)) {
 							innerSpan.className = "endyeardate";
-						} else if ((day == 31) && (month == 12)) {
+						} else if ((day == 31) && (month == 11)) {
 							innerSpan.className = "endyeardate";	
 						} else
 						*/
@@ -278,17 +278,44 @@ Module.register("mmm-lunar_calendar", {
 		bodyTR.id = "calendar-header";
 
 		var bodyTD = document.createElement("td");
-		bodyTD.className = "calendar-day";
+		bodyTD.colSpan ="7";
+		bodyTD.className = "calendar-header-day";
 		bodyTD.innerHTML = this.calLunarDateInfo(calendarType, month, year);
 		bodyTR.appendChild(bodyTD);
-
+ 
 		bodyContent.appendChild(bodyTR);
 		wrapper.appendChild(bodyContent);
 
 	},
 	
+	calGoodTime: function(month, year) {
+		var lunarDate = [0, 0, 0, 0];
+		var dayTimeList = ["23h-1h", "1h-3h", "3h-5h", "5h-7h", "7h-9h", "9h-11h", "11h-13h", "13h-15h", "15h-17h", "17h-19h", "19h-21h", "21h-23h"];
+		//var chiList = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+		var jd = this.jdFromDate(moment().date(), month + 1, year);
+		var goodTimeList = [[0, 1, 3, 6, 8, 9], [2, 3, 5, 8, 10, 11], [0, 1, 4, 5, 7, 10], [0, 2, 3, 6, 7, 9], [2, 4, 5, 8, 9, 11], [1, 4, 6, 7, 10, 11]];
+		var dateIndex = (jd + 1) % 12;	
+		if (dateIndex >= 6) {
+			dateIndex = dateIndex - 6;
+		}
+		var selectedTime = goodTimeList[dateIndex];
+		var goodTime = "";
+		
+		goodTimeList.forEach(mergeGoodTime);
+		
+		function mergeGoodTime(value, index, array) {
+			goodTime = goodTime + dayTimeList[value] + ", ";
+		}
+		
+		return goodTime;
+	},
+	
 	calLunarDateInfo: function(calendarType, month, year) {
+		var lunarDate = [0, 0, 0, 0];
+		var LunarDateInfo = "";
+
 		if (calendarType == 1) {
+			lunarDate = this.convertSolar2Lunar(moment().date(), month + 1, year, 7);	
 			jd = this.jdFromDate(moment().date(), month + 1, year);
 			var dateCan = this.calculateDateCan(jd);
 			var dateChi = this.calculateDateChi(jd);
@@ -331,71 +358,71 @@ Module.register("mmm-lunar_calendar", {
 			}
 		}
 
-		if ((day == 1) && (month == 0)) {
+		if ((moment().date() == 1) && (month == 0)) {
 			LunarDateInfo = LunarDateInfo + " - Tết Dương Lịch";
-		} else if ((day == 3) && (month == 1)) {
+		} else if ((moment().date() == 3) && (month == 1)) {
 			LunarDateInfo = LunarDateInfo + " - Thành Lập Đảng";
-		} else if ((day == 14) && (month == 1)) {
+		} else if ((moment().date() == 14) && (month == 1)) {
 			LunarDateInfo = LunarDateInfo + " - Valentine";
-		} else if ((day == 27) && (month == 1)) {
+		} else if ((moment().date() == 27) && (month == 1)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Thầy Thuốc";
-		} else if ((day == 8) && (month == 2)) {
+		} else if ((moment().date() == 8) && (month == 2)) {
 			LunarDateInfo = LunarDateInfo + " - Quốc Tế Phụ Nữ";
-		} else if ((day == 22) && (month == 2)) {
+		} else if ((moment().date() == 22) && (month == 2)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Nước Sạch Thế Giới";
-		} else if ((day == 26) && (month == 2)) {
+		} else if ((moment().date() == 26) && (month == 2)) {
 			LunarDateInfo = LunarDateInfo + " - Thành Lập Đoàn TNCS HCM";
-		} else if ((day == 27) && (month == 2)) {
+		} else if ((moment().date() == 27) && (month == 2)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Thể Thao Việt Nam";
-		} else if ((day == 22) && (month == 3)) {
+		} else if ((moment().date() == 22) && (month == 3)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Trái Đất";
-		} else if ((day == 30) && (month == 3)) {
+		} else if ((moment().date() == 30) && (month == 3)) {
 			LunarDateInfo = LunarDateInfo + " - Giải Phóng Miền Nam";
-		} else if ((day == 1) && (month == 4)) {
+		} else if ((moment().date() == 1) && (month == 4)) {
 			LunarDateInfo = LunarDateInfo + " - Quốc Tế Lao Động";
-		} else if ((day == 7) && (month == 4)) {
+		} else if ((moment().date() == 7) && (month == 4)) {
 			LunarDateInfo = LunarDateInfo + " - Chiến Thắng Điện Biên Phủ";
-		} else if ((day == 13) && (month == 4)) {
+		} else if ((moment().date() == 13) && (month == 4)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày của Mẹ";
-		} else if ((day == 13) && (month == 4)) {
+		} else if ((moment().date() == 13) && (month == 4)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày sinh Chủ tịch Hồ Chí Minh";
-		} else if ((day == 1) && (month == 5)) {
+		} else if ((moment().date() == 1) && (month == 5)) {
 			LunarDateInfo = LunarDateInfo + " - Quốc Tế Thiếu Nhi";
-		} else if ((day == 17) && (month == 5)) {
+		} else if ((moment().date() == 17) && (month == 5)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày của Cha";
-		} else if ((day == 21) && (month == 5)) {
+		} else if ((moment().date() == 21) && (month == 5)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Báo Chí Việt Nam";
-		} else if ((day == 28) && (month == 5)) {
+		} else if ((moment().date() == 28) && (month == 5)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Gia Đình Việt Nam";
-		} else if ((day == 11) && (month == 6)) {
+		} else if ((moment().date() == 11) && (month == 6)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Dân Số Thế Giới";
-		} else if ((day == 27) && (month == 6)) {
+		} else if ((moment().date() == 27) && (month == 6)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Thương Binh Liệt Sĩ";
-		} else if ((day == 19) && (month == 7)) {
+		} else if ((moment().date() == 19) && (month == 7)) {
 			LunarDateInfo = LunarDateInfo + " - Cách Mạng Tháng Tám";
-		} else if ((day == 2) && (month == 8)) {
+		} else if ((moment().date() == 2) && (month == 8)) {
 			LunarDateInfo = LunarDateInfo + " - Quốc Khánh Việt Nam";
-		} else if ((day == 7) && (month == 8)) {
+		} else if ((moment().date() == 7) && (month == 8)) {
 			LunarDateInfo = LunarDateInfo + " - Thành Lập Đài Truyền Hình VN";
-		} else if ((day == 1) && (month == 9)) {
+		} else if ((moment().date() == 1) && (month == 9)) {
 			LunarDateInfo = LunarDateInfo + " - Quốc Tế Người Cao Tuổi";
-		} else if ((day == 10) && (month == 9)) {
+		} else if ((moment().date() == 10) && (month == 9)) {
 			LunarDateInfo = LunarDateInfo + " - Giải Phóng Thủ Đô";
-		} else if ((day == 20) && (month == 9)) {
+		} else if ((moment().date() == 20) && (month == 9)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Phụ Nữ Việt Nam";
-		} else if ((day == 31) && (month == 9)) {
+		} else if ((moment().date() == 31) && (month == 9)) {
 			LunarDateInfo = LunarDateInfo + " - Holloween";
-		} else if ((day == 20) && (month == 10)) {
+		} else if ((moment().date() == 20) && (month == 10)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Nhà Giáo Việt Nam";
-		} else if ((day == 22) && (month == 11)) {
+		} else if ((moment().date() == 22) && (month == 11)) {
 			LunarDateInfo = LunarDateInfo + " - Ngày Quân Đội Việt Nam";
-		} else if ((day == 24) && (month == 11)) {
+		} else if ((moment().date() == 24) && (month == 11)) {
 			LunarDateInfo = LunarDateInfo + " - Giáng Sinh";
 		} else {
 			LunarDateInfo = LunarDateInfo + "&nbsp;";
 		}
 		return LunarDateInfo;
-	}
+	},
 	
 	jdFromDate: function(dd, mm, yy) {
 		var a, y, m, jd;
