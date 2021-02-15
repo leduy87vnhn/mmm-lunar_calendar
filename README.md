@@ -20,7 +20,7 @@ To use this module, add it to the modules array in the `config/config.js` file:
 ````javascript
 modules: [
 			{
-				module: 'lunar_calendar',
+				module: 'mmm-lunar_calendar',
 				position: 'top_left',
 				config: {
 						// The config property is optional
