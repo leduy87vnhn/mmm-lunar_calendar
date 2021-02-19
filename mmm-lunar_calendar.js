@@ -143,7 +143,7 @@ Module.register("mmm-lunar_calendar", {
 		if (this.config.debugging) {
 			displayGoodTime = "Calendar currently in DEBUG mode!<br />Please see console log.";
 		} else {
-			if ((calendarType == 1) && (goodTimeDisplay == true)) {
+			if ((calendarType == 1) && (this.config.goodTimeDisplay == true)) {
 				displayGoodTime = "Giờ hoàng đạo: " + this.calGoodTime(month, year);
 			} else {
 				displayGoodTime = "&nbsp;";
