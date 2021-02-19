@@ -21,6 +21,7 @@ Module.register("mmm-lunar_calendar", {
 							// This is to prevent collision with other modules refreshing
 							// at the same time.
 		displayMode:		"1",		// 0: only sun calendar, 1: sun and lunar calendar, 2: sun and lunar calendar in block style. Option 2 only support 'block' cssStyle
+		goodTimeDisplay:	true,
 	},
 
 	// Required styles
@@ -142,7 +143,7 @@ Module.register("mmm-lunar_calendar", {
 		if (this.config.debugging) {
 			displayGoodTime = "Calendar currently in DEBUG mode!<br />Please see console log.";
 		} else {
-			if (calendarType == 1) {
+			if ((calendarType == 1) && (goodTimeDisplay == true)) {
 				displayGoodTime = "Giờ hoàng đạo: " + this.calGoodTime(month, year);
 			} else {
 				displayGoodTime = "&nbsp;";
