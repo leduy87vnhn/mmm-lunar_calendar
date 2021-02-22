@@ -593,7 +593,7 @@ Module.register("mmm-lunar_calendar", {
 	},
 	
 	calculateMonthChi: function(mm) {
-		var chiList = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+		var chiList = ["Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu"];
 		var monthIndex = mm - 1;
 		return chiList[monthIndex];
 	},
